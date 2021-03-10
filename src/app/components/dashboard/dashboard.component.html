@@ -1,0 +1,42 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" fixedInViewport
+  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  [mode]="(isHandset$ | async) ? 'over' : 'side'"
+  [opened]="(isHandset$ | async) === false">
+  <mat-toolbar>
+    <figure>
+      <img src="../../../assets/images/logo1.png" class="imgMenu">
+    </figure>
+  </mat-toolbar>
+  <mat-nav-list style="margin-top: 50px;">
+    <a mat-list-item [routerLink]="['/home']">Home</a>
+    <a mat-list-item href="#">Contabilidad</a>
+    <a mat-list-item [routerLink]="['/assets']">Activos Fijos</a>
+    <a mat-list-item [routerLink]="['/providers']">Proveedores</a>
+    <a mat-list-item href="#">Costos</a>
+    <a mat-list-item href="#">Salir</a>
+  </mat-nav-list>
+</mat-sidenav>
+<mat-sidenav-content>
+  <mat-toolbar color="primary">
+    <button
+    type="button"
+    aria-label="Toggle sidenav"
+    mat-icon-button
+    (click)="drawer.toggle()"
+    *ngIf="isHandset$ | async">
+    <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+  </button>
+  <span> Software ERP </span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>circle_notifications</mat-icon>
+  </button>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-icon>face</mat-icon>
+  </button>
+</mat-toolbar>
+<!-- Add Content Here -->
+<router-outlet></router-outlet>
+</mat-sidenav-content>
+</mat-sidenav-container>
