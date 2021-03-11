@@ -1,0 +1,119 @@
+.containerT{
+  margin: 20px;
+}
+.mat-form-field {
+  margin-left: 10px;
+}
+.marginPaginator{
+  margin-top: 20px;
+}
+.upHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+
+  .titulo {
+    margin-top: 20px;
+  }
+
+  .btnAdd {
+    button {
+      color: white !important;
+      background-color: #ea4848;
+    }
+  }
+
+  .upItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// Estilos tabla scrolling
+.tablita {
+  min-height: auto;
+  height: auto;
+  width: 90vw;
+  max-width: 100%;
+  overflow: auto;
+  margin-bottom: 0 !important;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+}
+
+table {
+  width: 100%;
+}
+
+td.mat-column-star {
+  width: auto;
+  padding-right: 8px;
+  margin-right: 20px;
+}
+
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  padding: 5px 20px;
+  min-width: 100px;
+}
+
+.mat-table-sticky {
+  min-width: auto !important;
+}
+
+th.mat-column-position,
+td.mat-column-position {
+  padding-left: 8px;
+}
+
+.mat-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mat-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
+}
+
+.actions {
+  margin: 5px;
+  transition: 0.3s;
+  &:hover {
+    opacity: 0.5;
+  }
+}
+tr:hover{
+  background: #aedefc;
+}
+// Responsive
+
+// Tabla Responsive
+@media screen and (max-width: 960px) {
+  .upHeader {
+    display: block !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .upItem {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  // Estilos footer con boton flotante
+  .footer {
+    .botonFlotante {
+      display: initial;
+    }
+  }
+
+  .btnAdd button {
+    display: none;
+  }
+}
+
+
