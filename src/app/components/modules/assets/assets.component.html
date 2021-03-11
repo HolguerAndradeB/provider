@@ -4,113 +4,410 @@
     <mat-card-subtitle>{{ subTitle }}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div class="section">
-      <div class="row headerSection">
-        <div class="col-md-4">
-          <h1>Tabla Activos Fijos</h1>
-        </div>
-        <div class="col-md-4">
-          <mat-form-field>
-            <mat-label>Filter</mat-label>
-            <input
-              matInput
-              type="text"
-              (keyup)="hacerFiltro($event.target.value)"
-              name="filtro"
-              placeholder="Ej: Act1"
-            />
-          </mat-form-field>
-        </div>
-        <div class="col-md-4">
-          <button mat-flat-button color="primary">Action</button>
-        </div>
-      </div>
-      <div class="row bodySection">
-        <div class="table">
-          <!-- Tabla Responsive, carga de datos desde el dataSource, el cual almacena los datos traídos por el servicio GET -->
-          <table
-            mat-table
-            [dataSource]="dataSource"
-            class="mat-elevation-z8"
-            matSort
-          >
-            <!-- Contenedor del contenido de la tabla (Cabeceras y Celdas)  -->
-            <ng-container
-              [matColumnDef]="item.columnDef"
-              *ngFor="let item of headers"
-              [sticky]="item.fixed"
-            >
-              <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                <!-- Varialbe que contiene los títulos de las columnas (Cabeceras) (variable = item.header) -->
-                {{ item.header }}
-              </th>
-
-              <!-- Contenedor del contenido de la tabla (Celdas) -->
-              <ng-container
-                style="text-align: center"
-                class="actionHeader"
-                *ngIf="!item.actions"
+    <mat-tab-group>
+      <mat-tab label="Tabla">
+        <div class="section">
+          <div class="row headerSection">
+            <div class="col-md-4">
+              <h1>Tabla Activos Fijos</h1>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field>
+                <mat-label>Filter</mat-label>
+                <input
+                  matInput
+                  type="text"
+                  (keyup)="hacerFiltro($event.target.value)"
+                  name="filtro"
+                  placeholder="Ej: Act1"
+                />
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <button mat-flat-button color="primary">Action</button>
+            </div>
+          </div>
+          <div class="row bodySection">
+            <div class="table">
+              <!-- Tabla Responsive, carga de datos desde el dataSource, el cual almacena los datos traídos por el servicio GET -->
+              <table
+                mat-table
+                [dataSource]="dataSource"
+                class="mat-elevation-z8"
+                matSort
               >
-                <td class="filas" mat-cell *matCellDef="let element">
-                  <!-- Etiqueta con el contenido de cada columna ubicado en celdas capturado en la variable (variable = element[item.columnDef]) -->
-                  <label class="restLabel">{{ element[item.columnDef] }}</label>
-                </td>
-              </ng-container>
-
-              <!-- Columna que contiene el menú de acciones de cada fila de la tabla -->
-              <td mat-cell *matCellDef="let element" class="action-link">
-                <!-- Botón encargado de desplegar un menú con las acciones (Ver más, Editar, Eliminar) -->
-                <button
-                  class="actions"
-                  mat-icon-button
-                  [matMenuTriggerFor]="menu"
+                <!-- Contenedor del contenido de la tabla (Cabeceras y Celdas)  -->
+                <ng-container
+                  [matColumnDef]="item.columnDef"
+                  *ngFor="let item of headers"
+                  [sticky]="item.fixed"
                 >
-                  <!-- Icono que representa el menú de acciones -->
-                  <mat-icon>
-                    <!-- Variable que trae el nombre del icono a utilizar -->
-                    more_vert
-                  </mat-icon>
-                </button>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    <!-- Varialbe que contiene los títulos de las columnas (Cabeceras) (variable = item.header) -->
+                    {{ item.header }}
+                  </th>
 
-                <!-- Menú desplegable con acciones -->
-                <mat-menu #menu="matMenu">
-                  <!-- Botón acción (Ver Más) -->
-                  <button mat-menu-item>
-                    <mat-icon color="primary">visibility</mat-icon>
-                    <span>Ver más</span>
-                  </button>
+                  <!-- Contenedor del contenido de la tabla (Celdas) -->
+                  <ng-container
+                    style="text-align: center"
+                    class="actionHeader"
+                    *ngIf="!item.actions"
+                  >
+                    <td class="filas" mat-cell *matCellDef="let element">
+                      <!-- Etiqueta con el contenido de cada columna ubicado en celdas capturado en la variable (variable = element[item.columnDef]) -->
+                      <label class="restLabel">{{
+                        element[item.columnDef]
+                      }}</label>
+                    </td>
+                  </ng-container>
 
-                  <!-- Botón acción (Editar) -->
-                  <button mat-menu-item>
-                    <mat-icon color="accent">assignment_ind</mat-icon>
-                    <span>Asignar</span>
-                  </button>
+                  <!-- Columna que contiene el menú de acciones de cada fila de la tabla -->
+                  <td mat-cell *matCellDef="let element" class="action-link">
+                    <!-- Botón encargado de desplegar un menú con las acciones (Ver más, Editar, Eliminar) -->
+                    <button
+                      class="actions"
+                      mat-icon-button
+                      [matMenuTriggerFor]="menu"
+                    >
+                      <!-- Icono que representa el menú de acciones -->
+                      <mat-icon>
+                        <!-- Variable que trae el nombre del icono a utilizar -->
+                        more_vert
+                      </mat-icon>
+                    </button>
 
-                  <!-- Botón acción (Editar) -->
-                  <button mat-menu-item>
-                    <mat-icon color="warn">settings</mat-icon>
-                    <span>Editar</span>
-                  </button>
-                </mat-menu>
-              </td>
-            </ng-container>
+                    <!-- Menú desplegable con acciones -->
+                    <mat-menu #menu="matMenu">
+                      <!-- Botón acción (Ver Más) -->
+                      <button mat-menu-item>
+                        <mat-icon color="primary">visibility</mat-icon>
+                        <span>Ver más</span>
+                      </button>
 
-            <!-- Atributo de la tabla, encargado de desplegar las Cabeceras -->
-            <tr
-              mat-header-row
-              *matHeaderRowDef="displayedColumns; sticky: true"
-            ></tr>
+                      <!-- Botón acción (Editar) -->
+                      <button mat-menu-item>
+                        <mat-icon color="accent">assignment_ind</mat-icon>
+                        <span>Asignar</span>
+                      </button>
 
-            <!-- Atributo de la tabla, encargado de desplegar las Filas -->
-            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-          </table>
-          <mat-paginator
-            [pageSizeOptions]="[10, 15, 20]"
-            style=""
-            showFirstLastButtons
-          ></mat-paginator>
+                      <!-- Botón acción (Editar) -->
+                      <button mat-menu-item>
+                        <mat-icon color="warn">settings</mat-icon>
+                        <span>Editar</span>
+                      </button>
+                    </mat-menu>
+                  </td>
+                </ng-container>
+
+                <!-- Atributo de la tabla, encargado de desplegar las Cabeceras -->
+                <tr
+                  mat-header-row
+                  *matHeaderRowDef="displayedColumns; sticky: true"
+                ></tr>
+
+                <!-- Atributo de la tabla, encargado de desplegar las Filas -->
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+              </table>
+              <mat-paginator
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+              ></mat-paginator>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </mat-tab>
+      <mat-tab label="Second">
+        <form [formGroup]="assetForm" (ngSubmit)="addNewAsset(assetForm.value)">
+          <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="1. Activo">
+              <div
+                class="asset-form-container"
+                fxLayoutGap="10px"
+                fxFlexAlign="center"
+                fxLayout="column"
+              >
+                <mat-form-field appearance="standard">
+                  <mat-label>Nombre</mat-label>
+                  <input
+                    formControlName="name"
+                    #nameAsset
+                    matInput
+                    placeholder="Ej. Activo 1..."
+                  />
+                  <mat-error *ngIf="name.invalid"
+                    >Debe ingresar el nombre del Activo</mat-error
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Serie</mat-label>
+                  <input
+                    formControlName="serie"
+                    matInput
+                    placeholder="Ej. AX123456789..."
+                  />
+                  <mat-error *ngIf="serie.invalid"
+                    >Debe ingresar la serie del Activo</mat-error
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Grupo</mat-label>
+                  <mat-select formControlName="groupId">
+                    <mat-option *ngFor="let group of groups" [value]="group.id">
+                      {{ group.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="group.invalid"
+                    >Debe seleccionar el grupo del Activo</mat-error
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Modelo</mat-label>
+                  <input
+                    formControlName="model"
+                    matInput
+                    placeholder="Ej. Modelo X..."
+                  />
+                  <mat-error *ngIf="model.invalid"
+                    >Debe ingresar el modelo del Activo</mat-error
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Stiker</mat-label>
+                  <input
+                    formControlName="sticker"
+                    matInput
+                    placeholder="Ej. 000123..."
+                  />
+                  <mat-error *ngIf="model.invalid"
+                    >Debe ingresar el stiker asignado al Activo</mat-error
+                  >
+                </mat-form-field>
+              </div>
+            </mat-tab>
+
+            <mat-tab label="2. Inventario">
+              <div
+                class="asset-form-container"
+                fxLayoutGap="10px"
+                fxFlexAlign="center"
+                fxLayout="column"
+              >
+                <mat-form-field appearance="standard">
+                  <mat-label>Tipo de Inventario</mat-label>
+                  <mat-select formControlName="inventoryType">
+                    <mat-option
+                      *ngFor="let iType of inventoryTypes"
+                      [value]="iType.value"
+                    >
+                      {{ iType.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="inventoryType.invalid"
+                    >Debe seleccionar el tipo de inventario del
+                    Activo</mat-error
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Depreciable</mat-label>
+                  <mat-select formControlName="depreciable">
+                    <mat-option
+                      *ngFor="let deprec of depreciables"
+                      [value]="deprec.value"
+                      >{{ deprec.viewValue }}</mat-option
+                    >
+                  </mat-select>
+                  <mat-error *ngIf="depreciable.invalid"
+                    >Debe seleccionar el estado drepeciable del
+                    Activo</mat-error
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Activo Fijo</mat-label>
+                  <mat-select formControlName="activeAsset">
+                    <mat-option
+                      *ngFor="let activeA of activeAssets"
+                      [value]="activeA.value"
+                    >
+                      {{ activeA.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="activeAsset.invalid"
+                    >Debe seleccionar el estado del Activo</mat-error
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Situación del Activo</mat-label>
+                  <mat-select formControlName="assetSituation">
+                    <mat-option
+                      *ngFor="let assetS of assetSituations"
+                      [value]="assetS.value"
+                    >
+                      {{ assetS.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="assetSituation.invalid"
+                    >Debe seleccionar la situación del Activo</mat-error
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="standard">
+                  <mat-label>Adquisición</mat-label>
+                  <mat-select formControlName="acquisition">
+                    <mat-option
+                      *ngFor="let acquisition of acquisitions"
+                      [value]="acquisition.value"
+                    >
+                      {{ acquisition.viewValue }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="acquisition.invalid"
+                    >Debe seleccionar la adquisición del Activo</mat-error
+                  >
+                </mat-form-field>
+                <div class="checkAccesories">
+                  <mat-checkbox class="checkAcc" #accessorie
+                    >El Activo tiene accesorios?</mat-checkbox
+                  >
+                </div>
+              </div>
+            </mat-tab>
+            <mat-tab
+              type="submit"
+              (click)="addNewAsset(assetForm.value)"
+              label="3. Accesorios"
+              [disabled]="!accessorie.checked"
+            >
+              <form
+                [formGroup]="accessorieForm"
+                (ngSubmit)="addNewAccessorie(accessorieForm.value)"
+              >
+                <div
+                  class="asset-form-container"
+                  fxLayoutGap="10px"
+                  fxFlexAlign="center"
+                  fxLayout="column"
+                >
+                  <mat-form-field appearance="standard">
+                    <mat-label>Nombre</mat-label>
+                    <input
+                      formControlName="accName"
+                      matInput
+                      placeholder="Ej. Acce1..."
+                    />
+                    <mat-error *ngIf="accName.invalid"
+                      >Debe ingresar el nombre del Accsesorio</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Marca</mat-label>
+                    <mat-select formControlName="mark">
+                      <mat-option
+                        *ngFor="let group of groups"
+                        [value]="group.id"
+                      >
+                        {{ group.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="mark.invalid"
+                      >Debe seleccionar la marca del Accsesorio</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Condición</mat-label>
+                    <mat-select formControlName="condition">
+                      <mat-option
+                        *ngFor="let group of groups"
+                        [value]="group.id"
+                      >
+                        {{ group.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="condition.invalid"
+                      >Debe seleccionar la condición del Accsesorio</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Activo</mat-label>
+                    <input formControlName="asset" matInput />
+                    <mat-error *ngIf="asset.invalid"
+                      >Debe ingresar el Activo al cual pertenece el
+                      Accsesorio</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Factura</mat-label>
+                    <mat-select formControlName="invoiced">
+                      <mat-option
+                        *ngFor="let group of groups"
+                        [value]="group.id"
+                      >
+                        {{ group.name }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="invoiced.invalid"
+                      >Debe seleccionar al factura que corresponde al
+                      Accsesorio</mat-error
+                    >
+                  </mat-form-field>
+                  <div class="addAccessorie">
+                    <button
+                      type="submit"
+                      mat-raised-button
+                      color="accent"
+                      [disabled]="accessorieForm.invalid"
+                    >
+                      Agregar Accesorio
+                    </button>
+                  </div>
+                </div>
+                <div
+                  class="accesories"
+                  style="padding: 10px"
+                  style="width: 100%"
+                >
+                  <mat-form-field
+                    appearance="none"
+                    class="example-chip-list"
+                    style="width: 90%"
+                  >
+                    <mat-chip-list
+                      #chipList
+                      aria-label="Fruit selection"
+                      style="border-bottom: none"
+                    >
+                      <mat-chip
+                        *ngFor="let accessorie of accessories"
+                        [selectable]="selectable"
+                        [removable]="removable"
+                        (removed)="remove(accessorie)"
+                      >
+                        {{ accessorie.accName }}
+                        <mat-icon matChipRemove *ngIf="removable"
+                          >cancel</mat-icon
+                        >
+                      </mat-chip>
+                    </mat-chip-list>
+                  </mat-form-field>
+                </div>
+              </form>
+            </mat-tab>
+          </mat-tab-group>
+          <div class="submitForm">
+            <button mat-flat-button mat-dialog-close>Cancelar</button>
+            <button
+              [disabled]="assetForm.invalid"
+              type="submit"
+              mat-flat-button
+              color="primary"
+            >
+              Agregar
+            </button>
+          </div>
+        </form>
+      </mat-tab>
+      <mat-tab label="Third"> Content 3 </mat-tab>
+    </mat-tab-group>
   </mat-card-content>
 </mat-card>

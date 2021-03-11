@@ -1,7 +1,6 @@
 .container {
   width: 95%;
   margin: 20px auto;
-
   .section {
     .bodySection {
       width: 100%;
@@ -15,7 +14,6 @@
         overflow: auto;
         box-shadow: 0px 0px 10px 1px #ccc;
         border-radius: 10px;
-
         table {
           width: 100%;
           td.mat-column-star {
@@ -23,31 +21,25 @@
             padding-right: 8px;
             margin-right: 20px;
           }
-
           th.mat-header-cell,
           td.mat-cell,
           td.mat-footer-cell {
             padding: 5px 20px;
             min-width: 100px;
           }
-
           .mat-table-sticky {
             min-width: auto !important;
           }
-
           th.mat-column-position,
           td.mat-column-position {
             padding-left: 8px;
           }
-
           .mat-table-sticky-border-elem-right {
             border-left: 1px solid #e0e0e0;
           }
-
           .mat-table-sticky-border-elem-left {
             border-right: 1px solid #e0e0e0;
           }
-
           .actions {
             margin: 5px;
             transition: 0.3s;

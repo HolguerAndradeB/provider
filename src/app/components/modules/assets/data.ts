@@ -51,3 +51,48 @@ export interface Accessorie {
   idMark?: string;
   idInvoice?: string;
 }
+
+
+/**
+ * Interface encargada de asignar el tipo de datos para el Tipo de Inventario
+ */
+ export interface InventoryType {
+  value: number;
+  viewValue: string;
+}
+
+/**
+ * Interface encargada de asignar el tipo de datos para Depreciable
+ */
+export interface Depreciable {
+  value: number;
+  viewValue: string;
+}
+
+/**
+ * Interface encargada de asignar el tipo de datos para Activo Activo
+ */
+export interface ActiveAsset {
+  value: number;
+  viewValue: string;
+}
+
+/**
+ * Interface encargada de asignar el tipo de datos para Situación Activo
+ */
+export interface AssetSituation {
+  value: number;
+  viewValue: string;
+}
+
+/**
+ * Interface encargada de asignar el tipo de datos para Adquisición
+ */
+export interface Acquisition {
+  value: number;
+  viewValue: string;
+}
+
+export interface Condition {
+  name: string;
+}
